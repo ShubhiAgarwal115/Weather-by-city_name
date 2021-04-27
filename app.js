@@ -6,37 +6,16 @@ const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine","ejs");
-app.get("/",function(req,res){
 
-  res.sendFile(__dirname + "/index.html");
-  var data=new Date();
-  var currday=data.getDay();
-  var day="";
-  switch (currday) {
-    case 0:
-      day="Sunday";
-      break;
-    case 1:
-     day="Monnday";
-      break;
-    case 2:
-    day="Tuesday";
-    break;
-    case 3:
-    day="Wednesday";
-    break;
-    case 4:
-    day="Thursday";
-    break;
-    case 5:
-    day="Friday";
-    break;
-    case 6:
-    day="Saturday";
-    default:
-    res.write("Error your day is: "+ currday);
-  }
-    res.render("list",{kindofday:day});
+app.get("/",function(req,res){
+var today=new Date();//today is the object
+var options={
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+}
+var day=today.toLocaleDateString("en-US",options);
+ res.render("list",{kindofday:day});
 });
 app.post("/",function(req,res){
   // console.log(req.body.cityName);
