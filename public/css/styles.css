@@ -1,0 +1,13 @@
+body{
+
+  background-image: url("../images/shubhi.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.container{
+  text-align: center;
+  background-attachment: fixed;
+  margin: 220px;
+}
