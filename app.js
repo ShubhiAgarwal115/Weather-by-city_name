@@ -9,7 +9,9 @@ app.set("view engine","ejs");
 
 app.get("/",function(req,res){
 var today=new Date();//today is the object
+
 var options={
+  year: "numeric",
   weekday: "long",
   day: "numeric",
   month: "long",
