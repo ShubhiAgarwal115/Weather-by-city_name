@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express=require("express");
 const bodyParser=require("body-parser")
 const https=require("https");
@@ -6,23 +7,15 @@ const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine","ejs");
-
+console.log(process.env.API_KEY);
 app.get("/",function(req,res){
-var today=new Date();//today is the object
-
-var options={
-  year: "numeric",
-  weekday: "long",
-  day: "numeric",
-  month: "long",
-}
-var day=today.toLocaleDateString("en-US",options);
- res.render("list",{kindofday:day});
+ res.sendFile(__dirname+"/index.html");
 });
+
 app.post("/",function(req,res){
   // console.log(req.body.cityName);
   const query=req.body.cityName;
-  const appid="387723b56e8c7e089e697e5630c08886";
+  const appid=process.env.API_KEY;
   const unit="metric";
   const url="https://api.openweathermap.org/data/2.5/weather?q="+query+"&units="+unit+"&appid="+appid ;
   https.get(url,function(response){
